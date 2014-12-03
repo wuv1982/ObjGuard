@@ -1,0 +1,7 @@
+#remove from obfuscation targets
+#ClassB
+
+ClassA
+MethodB
+CategoryC
+ProtocolD
