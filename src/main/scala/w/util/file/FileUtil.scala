@@ -40,7 +40,7 @@ object FileUtil {
 		}
 	}
 
-	def update(target: String)(updateLine: String => String) {
+	def update(target: String)(updateLine: String => Option[String]) {
 		val targetPath = Paths.get(target)
 		val backup = s"$target.bk"
 		val backupPath = Paths.get(backup)
@@ -54,7 +54,9 @@ object FileUtil {
 			bufWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(target), "utf-8"))
 
 			for (readLine <- Source.fromFile(backup, "utf-8").getLines) {
-				bufWriter.write(updateLine(readLine) + "\n")
+				updateLine(readLine).map { newline =>
+					bufWriter.write(newline + "\n")
+				}
 			}
 			Files.delete(backupPath)
 		} finally {

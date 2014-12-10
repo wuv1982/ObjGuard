@@ -54,7 +54,7 @@ case class XcBuild(
 							}
 						}
 					}
-					writeLine
+					Some(writeLine)
 				}
 			} else {
 				println(s"ignore $nameSuffix")
@@ -77,7 +77,7 @@ case class XcBuild(
 					writeLine = readLine.replaceAll(name, randomName)
 				}
 			}
-			writeLine
+			Some(writeLine)
 		}
 	}
 
